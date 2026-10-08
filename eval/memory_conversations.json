@@ -1,0 +1,50 @@
+[
+  {
+    "turns": [
+      "My kitchen pipe burst and damaged my flooring. I'm Silver tier - am I covered?",
+      "Which claim form do I use for that?"
+    ],
+    "expect": [
+      "HC-2"
+    ]
+  },
+  {
+    "turns": [
+      "Is Escape of Water covered on the Silver tier?",
+      "What's the excess?"
+    ],
+    "expect": [
+      "RM1,000"
+    ]
+  },
+  {
+    "turns": [
+      "My house flooded. I'm Gold tier and I have the Special Perils Extension. Am I covered?",
+      "How much is the excess for that?"
+    ],
+    "expect": [
+      "10%",
+      "2,500"
+    ]
+  },
+  {
+    "turns": [
+      "How long is the waiting period before I can claim for hospitalisation?",
+      "What about for diabetes?"
+    ],
+    "expect": [
+      "120"
+    ]
+  },
+  {
+    "turns": [
+      "My kitchen pipe burst. I'm Silver tier - am I covered?",
+      "Separately, is a laptop stolen in a break-in at my house covered?"
+    ],
+    "expect": [],
+    "rewrite_must_not_mention": [
+      "pipe",
+      "escape of water"
+    ]
+  }
+]

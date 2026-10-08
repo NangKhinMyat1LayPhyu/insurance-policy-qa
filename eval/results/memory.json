@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "without_memory": "1/4",
+    "with_memory": "4/4"
+  },
+  "conversations": [
+    {
+      "follow_up": "Which claim form do I use for that?",
+      "rewritten": "Which claim form do I use for damage to my flooring caused by a burst kitchen pipe under my Silver tier HomeCare policy?",
+      "without_memory": {
+        "answer": "The claim form you need to use depends on the specific peril or section under which you are claiming:\n\n* For Section A (HomeCare) claims involving fire, lightning, explosion, storm, theft, impact, riot, and power surge, Form HC-1 (General Home Claim) is used (Source: Claims Procedure Guide, page 3). \n* For water damage where you are uncertain whether it was caused by Escape of Water or by Flood, you should submit Form HC-2 and Form HC-4 together (Source: Claims Procedure Guide, page 3).\n* For Section B (Health) reimbursement claims, Form MC-1 is required (Source: Claims Procedure Guide, page 6).\n\nPlease note that this is not a claims decision. If the situation relates to a specific claim, please provide the details of the peril or medical event so the correct form can be confirmed.",
+        "pass": true
+      },
+      "with_memory": {
+        "answer": "For damage to your flooring caused by a burst kitchen pipe, which is treated as an Escape of Water under Section A, you must use **Form HC-2 (Water Damage Claim)** (Source: Claims Procedure Guide, page 3). \n\n*(Note: This sounds like an actual claim.)*",
+        "pass": true
+      }
+    },
+    {
+      "follow_up": "What's the excess?",
+      "rewritten": "What is the excess for Escape of Water on the Silver tier?",
+      "without_memory": {
+        "answer": "The provided documents show that the Excess amount depends on the tier (Silver, Gold, or Platinum) and the Insured Peril that caused the loss (Source: Policy Wording, page 3; Benefits Schedule, page 3). Please state your tier and the Insured Peril so the correct Excess can be provided.",
+        "pass": false
+      },
+      "with_memory": {
+        "answer": "The excess for Escape of Water on the Silver tier is RM1,000 (Source: Benefits Schedule, page 3).",
+        "pass": true
+      }
+    },
+    {
+      "follow_up": "How much is the excess for that?",
+      "rewritten": "How much is the excess for flood damage under the Gold tier with the Special Perils Extension?",
+      "without_memory": {
+        "answer": "The provided documents do not specify whether the claim falls under Section A (HomeCare) or Section B (Health), the specific type of loss or benefit, the selected tier (Silver, Gold, or Platinum), or whether the premises were occupied overnight, all of which determine the applicable Excess or Co-insurance (Source: Benefits Schedule, page 1; Policy Wording, page 2). Please provide the missing details, such as the tier and whether this is a Section A (HomeCare) matter, so the correct amount can be checked. \n\n*(Note: This is not a claims decision.)*",
+        "pass": false
+      },
+      "with_memory": {
+        "answer": "Under the Gold tier with the Special Perils Extension, the excess for flood damage is 10% of the adjusted loss, with a minimum of RM2,500 (Source: Benefits Schedule, page 3). \n\n*(Note: This is a Section A property matter and is not a formal claims decision.)*",
+        "pass": true
+      }
+    },
+    {
+      "follow_up": "What about for diabetes?",
+      "rewritten": "What is the waiting period before I can claim for hospitalisation due to diabetes?",
+      "without_memory": {
+        "answer": "The provided documents do not answer this.",
+        "pass": false
+      },
+      "with_memory": {
+        "answer": "The provided documents do not explicitly mention diabetes or state whether it is classified as a general Illness or a Specified Illness (Source: Policy Wording, page 8). \n\nFor illnesses generally, no benefit is payable for any Disability caused by an Illness whose symptoms first manifest, or which is first diagnosed or treated, within 30 days after the Effective Date (Source: Policy Wording, page 8). For a Specified Illness, the waiting period is 120 days after the Effective Date (Source: Policy Wording, page 8). However, because the provided texts do not define whether diabetes falls under general Illness or Specified Illness, a definitive waiting period cannot be confirmed from the documents.",
+        "pass": true
+      }
+    },
+    {
+      "follow_up": "Separately, is a laptop stolen in a break-in at my house covered?",
+      "rewritten": "Is a laptop stolen in a break-in at my house covered under my Silver tier insurance policy?",
+      "without_memory": {
+        "answer": "To answer whether a laptop stolen in a break-in is covered, please state which tier (Silver, Gold, or Platinum) your policy is on, as coverage and limits depend on it. \n\nSubject to your policy tier and provided the break-in involved forcible and violent entry into or exit from the buildings, theft is an insured peril under Section A (Policy Wording, page 5). A laptop is classified as \"Valuables\" under the policy (Policy Wording, page 4), and theft coverage limits are specified in the Benefits Schedule (Benefits Schedule, page 3). \n\n*(Note: This is not a claims decision.)*",
+        "pass": true
+      },
+      "with_memory": {
+        "answer": "A laptop is defined as a \"Valuable\" under the policy (Source: Policy Wording, page 4). Theft involving forcible and violent entry (a break-in) is covered and not barred by exclusion 5.2.5 (Source: Policy Wording, page 10). \n\nFor the Silver tier, the Benefits Schedule lists a limit of RM2,000 for any one article of Valuables (Source: Benefits Schedule, page 1) and a limit of RM250 for Theft (Source: Benefits Schedule, page 3). \n\n*(Note: This response addresses coverage terms only and is not a formal claims decision.)*",
+        "pass": true
+      },
+      "rewrite_kept_topic_separate": true
+    }
+  ]
+}

@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import qa
 
-from server.db import init_db, log_message
+from server.db import init_db, log_message, recent_turns
 from server.escalation import flag_reason
 
 
@@ -69,7 +69,9 @@ def health():
 @app.post("/api/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
     try:
-        text, hits, cache_info = qa.answer(req.message)
+        history = recent_turns(req.session_id, qa.HISTORY_TURNS)
+        standalone = qa.rewrite_with_history(req.message, history)
+        text, hits, cache_info = qa.answer(standalone)
     except genai_errors.APIError as e:
         status = 503 if e.code == 429 else 502
         raise HTTPException(status_code=status, detail="The answer service is busy. Please try again in a minute.")
@@ -96,6 +98,7 @@ def chat(req: ChatRequest):
         category=cache_info.get("category"),
         tier=cache_info.get("tier"),
         flag_reason=reason,
+        standalone_question=standalone if standalone != req.message else None,
     )
 
     return ChatResponse(

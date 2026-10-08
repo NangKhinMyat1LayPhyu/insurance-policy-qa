@@ -12,6 +12,7 @@ ADDED_COLUMNS = {
     "needs_human": "INTEGER NOT NULL DEFAULT 0",
     "flag_reason": "TEXT",
     "resolved": "INTEGER NOT NULL DEFAULT 0",
+    "standalone_question": "TEXT",
 }
 
 
@@ -45,15 +46,15 @@ def init_db():
 
 
 def log_message(session_id, question, answer, cache_hit, similarity, matched_question,
-                category=None, tier=None, flag_reason=None):
+                category=None, tier=None, flag_reason=None, standalone_question=None):
     conn = get_connection()
     conn.execute(
         """INSERT INTO messages
            (session_id, time, question, answer, cache_hit, similarity, matched_question,
-            category, tier, needs_human, flag_reason)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            category, tier, needs_human, flag_reason, standalone_question)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (session_id, time.strftime("%Y-%m-%d %H:%M:%S"), question, answer, int(cache_hit), similarity,
-         matched_question, category, tier, int(flag_reason is not None), flag_reason),
+         matched_question, category, tier, int(flag_reason is not None), flag_reason, standalone_question),
     )
     conn.commit()
     conn.close()
@@ -64,3 +65,14 @@ def set_resolved(message_id, resolved=True):
     conn.execute("UPDATE messages SET resolved = ? WHERE id = ?", (int(resolved), message_id))
     conn.commit()
     conn.close()
+
+
+def recent_turns(session_id, limit):
+    conn = get_connection()
+    rows = conn.execute(
+        """SELECT COALESCE(standalone_question, question) AS question, answer FROM messages
+           WHERE session_id = ? ORDER BY id DESC LIMIT ?""",
+        (session_id, limit),
+    ).fetchall()
+    conn.close()
+    return [(row["question"], row["answer"]) for row in reversed(rows)]

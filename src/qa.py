@@ -58,6 +58,45 @@ Rules:
 - Be concise."""
 
 
+HISTORY_TURNS = 3
+HISTORY_ANSWER_CHARS = 600
+
+REWRITE_PROMPT = """You rewrite a customer's latest message to an insurance support bot so it can be understood WITHOUT the earlier conversation.
+
+Rules:
+- Output ONE standalone question and nothing else -- no preamble, no quotes, no answer.
+- Carry over every detail from the conversation that the latest message depends on: the plan tier (Silver/Gold/Platinum), the peril or benefit being discussed (e.g. Escape of Water, Flood, hospitalisation), add-ons such as the Special Perils Extension, and what happened.
+- Resolve words like "that", "it", "this", "the same" into what they refer to.
+- If the latest message is already a complete question on its own, or changes to an unrelated topic, return it unchanged.
+- Never add facts the customer did not state, and never answer the question."""
+
+
+def rewrite_with_history(question, history, model=MODEL):
+    if not history:
+        return question
+
+    transcript = "\n\n".join(
+        f"Customer: {q}\nBot: {a[:HISTORY_ANSWER_CHARS]}" for q, a in history
+    )
+    client = genai.Client()
+    response = client.models.generate_content(
+        model=model,
+        contents=f"Conversation so far:\n\n{transcript}\n\nLatest message: {question}",
+        config=types.GenerateContentConfig(
+            system_instruction=REWRITE_PROMPT,
+            max_output_tokens=1024,
+            temperature=0,
+            thinking_config=types.ThinkingConfig(thinking_level=types.ThinkingLevel.LOW),
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
+        ),
+    )
+    finish_reason = response.candidates[0].finish_reason if response.candidates else None
+    rewritten = (response.text or "").strip().strip('"')
+    if finish_reason != types.FinishReason.STOP or not rewritten:
+        return question
+    return rewritten
+
+
 @lru_cache(maxsize=1)
 def load_store():
     if not (INDEX_DIR / "index.faiss").exists():

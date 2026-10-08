@@ -132,7 +132,10 @@ def conversations_tab(df):
     session_id = sessions.iloc[rows[0]]["session_id"]
     st.subheader(f"Conversation {session_id[:8]}")
     for msg in df[df["session_id"] == session_id].itertuples():
-        st.chat_message("user").write(msg.question)
+        with st.chat_message("user"):
+            st.write(msg.question)
+            if pd.notna(msg.standalone_question):
+                st.caption(f"Understood as: {msg.standalone_question}")
         with st.chat_message("assistant"):
             st.write(msg.answer)
             notes = [f"{msg.time:%H:%M}", msg.category]

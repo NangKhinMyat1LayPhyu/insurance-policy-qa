@@ -20,7 +20,8 @@ Insurance answers depend on several documents with different authority. The clos
 
 ```mermaid
 flowchart LR
-    Q[Question] --> C[Classify into<br/>policy term + tier]
+    Q[Question] --> M[Rewrite follow-ups<br/>using recent turns]
+    M --> C[Classify into<br/>policy term + tier]
     C --> K{Semantic<br/>cache}
     K -- hit --> A[Answer + citations]
     K -- miss --> R[Hybrid search<br/>FAISS + BM25]
@@ -32,6 +33,7 @@ flowchart LR
 
 - **Table-aware PDF parsing:** every benefits-table row keeps its Silver/Gold/Platinum headers, and every chunk is tagged with its document and policy section.
 - **Hybrid retrieval:** vector and keyword search, guided by a classifier that maps plain language to policy terms ("burst pipe" → *Escape of Water*).
+- **Conversation memory:** follow-ups like "which form do I use for that?" are rewritten into complete questions from the recent conversation, so search and the cache always see the full question.
 - **Grounded answers:** exclusions are checked before amounts, the contract outranks the summary, and every fact is cited.
 - **A safe semantic cache:** an answer is reused only for the same policy term and tier.
 - **Escalation:** a conversation is flagged for staff when the documents don't answer it or the customer asks for a person.
@@ -43,6 +45,7 @@ flowchart LR
 | Trick questions answered correctly | **21 / 21** runs |
 | Answer passage found by search | **13 / 13** questions |
 | Wrong cached answers on near-miss questions | **0%** |
+| Follow-up questions answered correctly | **4 / 4** (1 / 4 without memory) |
 
 ## Highlights
 
