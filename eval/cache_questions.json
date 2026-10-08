@@ -1,0 +1,143 @@
+{
+  "equivalent_groups": [
+    {
+      "topic": "escape_of_water_excess_silver",
+      "true_answer": "RM1,000",
+      "questions": [
+        "What is the Excess for Escape of Water on Silver tier?",
+        "How much do I have to pay before an Escape of Water claim kicks in, Silver plan?",
+        "What's my deductible for a burst pipe claim if I'm on Silver?",
+        "Silver tier Escape of Water Excess amount?"
+      ]
+    },
+    {
+      "topic": "escape_of_water_limit_gold",
+      "true_answer": "RM75,000",
+      "questions": [
+        "What is the maximum payout for Escape of Water on Gold tier?",
+        "How much coverage do I get for water damage under the Gold plan?",
+        "Gold tier Escape of Water limit per event?",
+        "If my pipe bursts and I'm Gold tier, what's the most I can claim?"
+      ]
+    },
+    {
+      "topic": "flood_buildings_limit_platinum",
+      "true_answer": "100% of Buildings Sum Insured",
+      "questions": [
+        "How much flood coverage do I get on Platinum for my Buildings?",
+        "What's the flood limit for Buildings under Platinum tier?",
+        "Platinum plan flood damage payout for my house structure?"
+      ]
+    },
+    {
+      "topic": "overall_annual_limit_gold",
+      "true_answer": "RM500,000",
+      "questions": [
+        "What's the total yearly medical coverage limit for Gold tier?",
+        "How much can I claim in total per year for health under Gold?",
+        "Gold tier Overall Annual Limit amount?",
+        "What's my annual cap on medical claims if I'm on the Gold plan?"
+      ]
+    },
+    {
+      "topic": "coinsurance_silver",
+      "true_answer": "20%",
+      "questions": [
+        "What percentage do I pay myself for medical claims on Silver?",
+        "Silver tier co-insurance rate?",
+        "How much of my hospital bill do I have to cover under Silver?"
+      ]
+    },
+    {
+      "topic": "illness_waiting_period",
+      "true_answer": "30 days",
+      "questions": [
+        "How long do I have to wait before illness coverage starts?",
+        "What's the waiting period for a general illness claim?",
+        "When does my Section B illness cover become active after I sign up?",
+        "How soon after joining can I claim for getting sick?"
+      ]
+    },
+    {
+      "topic": "theft_excess_silver",
+      "true_answer": "RM250",
+      "questions": [
+        "What is the Excess for theft on Silver tier?",
+        "How much do I pay before a theft claim is paid out, Silver plan?",
+        "Silver tier theft Excess amount?"
+      ]
+    }
+  ],
+  "adversarial_pairs": [
+    {
+      "note": "Same phrasing pattern, different peril, different Excess amount (RM1,000 vs RM250 vs RM500).",
+      "topic_a": "escape_of_water_excess_silver",
+      "question_a": "What is the Excess for Escape of Water on Silver tier?",
+      "topic_b": "theft_excess_silver",
+      "question_b": "What is the Excess for theft on Silver tier?"
+    },
+    {
+      "note": "Same peril and question shape, different tier, different limit (RM25,000 vs RM75,000).",
+      "topic_a": "escape_of_water_limit_silver_implicit",
+      "question_a": "What is the Escape of Water limit for Silver tier?",
+      "topic_b": "escape_of_water_limit_gold",
+      "question_b": "What is the Escape of Water limit for Gold tier?"
+    },
+    {
+      "note": "Same question shape ('what's the X limit for Gold tier'), different peril, and Flood is conditional on an endorsement while Escape of Water is not -- different coverage LOGIC, not just a different number.",
+      "topic_a": "flood_limit_gold",
+      "question_a": "What is the Flood limit for Buildings on Gold tier?",
+      "topic_b": "escape_of_water_limit_gold",
+      "question_b": "What is the Escape of Water limit for Gold tier?"
+    },
+    {
+      "note": "Same shape, different tier, different Co-insurance percentage (20% vs 10% vs Nil).",
+      "topic_a": "coinsurance_silver",
+      "question_a": "What is the Co-insurance percentage for Silver tier?",
+      "topic_b": "coinsurance_gold_implicit",
+      "question_b": "What is the Co-insurance percentage for Gold tier?"
+    },
+    {
+      "note": "One word different (Illness vs Specified Illness), 4x different waiting period (30 vs 120 days) -- the single most dangerous near-miss in this set.",
+      "topic_a": "illness_waiting_period",
+      "question_a": "How long is the waiting period for Illness?",
+      "topic_b": "specified_illness_waiting_period",
+      "question_b": "How long is the waiting period for a Specified Illness?"
+    },
+    {
+      "note": "Both 'is theft covered' in shape, opposite answers -- forcible entry into the home is covered (Clause A2.4), theft from an unattended vehicle is excluded (Exclusion 5.2.6).",
+      "topic_a": "theft_from_home_covered",
+      "question_a": "Is theft from my house covered if someone broke in?",
+      "topic_b": "theft_from_car_covered",
+      "question_b": "Is theft from my car covered?"
+    },
+    {
+      "note": "Both 'how much do I pay myself' in shape, but Section A uses a flat Excess and Section B uses a Co-insurance percentage -- different mechanism entirely, not just a different number.",
+      "topic_a": "section_a_out_of_pocket",
+      "question_a": "How much do I pay out of pocket for a property damage claim?",
+      "topic_b": "section_b_out_of_pocket",
+      "question_b": "How much do I pay out of pocket for a hospital claim?"
+    },
+    {
+      "note": "Both about tier upgrades/changes, opposite waiting-period treatment -- an upgrade re-triggers waiting periods for the added benefits, a downgrade does not.",
+      "topic_a": "tier_upgrade_waiting_period",
+      "question_a": "If I upgrade my tier, do the waiting periods start over?",
+      "topic_b": "tier_downgrade_waiting_period",
+      "question_b": "If I downgrade my tier, do the waiting periods start over?"
+    },
+    {
+      "note": "Both about missing a payment, very different consequence -- a missed MONTHLY instalment has a 30-day grace period before lapse; there is no grace period for annual premium at all.",
+      "topic_a": "monthly_instalment_grace_period",
+      "question_a": "What happens if I miss a monthly premium payment?",
+      "topic_b": "annual_premium_grace_period",
+      "question_b": "What happens if I miss my annual premium payment?"
+    },
+    {
+      "note": "Both 'is a second claim covered', different exclusion logic entirely -- a readmission within 90 days is the SAME Disability (one claim, same limit); a second Escape of Water claim just consumes the per-event limit again (no readmission-style bundling rule at all).",
+      "topic_a": "readmission_same_disability",
+      "question_a": "If I'm readmitted to hospital for the same condition within 90 days, is that a new claim?",
+      "topic_b": "second_escape_of_water_claim",
+      "question_b": "If I have a second Escape of Water claim, is that a new claim?"
+    }
+  ]
+}

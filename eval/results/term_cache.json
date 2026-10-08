@@ -1,0 +1,170 @@
+{
+  "Gold tier Escape of Water limit per event?": {
+    "category": "Escape of Water",
+    "tier": "Gold"
+  },
+  "Gold tier Overall Annual Limit amount?": {
+    "category": "Overall Annual Limit",
+    "tier": "Gold"
+  },
+  "How long do I have to wait before illness coverage starts?": {
+    "category": "Waiting Period",
+    "tier": null
+  },
+  "How long is the waiting period for Illness?": {
+    "category": "Waiting Period",
+    "tier": null
+  },
+  "How long is the waiting period for a Specified Illness?": {
+    "category": "Waiting Period",
+    "tier": null
+  },
+  "How much can I claim in total per year for health under Gold?": {
+    "category": "Overall Annual Limit",
+    "tier": "Gold"
+  },
+  "How much coverage do I get for water damage under the Gold plan?": {
+    "category": "Escape of Water",
+    "tier": "Gold"
+  },
+  "How much do I have to pay before an Escape of Water claim kicks in, Silver plan?": {
+    "category": "Co-insurance",
+    "tier": "Silver"
+  },
+  "How much do I pay before a theft claim is paid out, Silver plan?": {
+    "category": "Theft",
+    "tier": "Silver"
+  },
+  "How much do I pay out of pocket for a hospital claim?": {
+    "category": "Co-insurance",
+    "tier": null
+  },
+  "How much do I pay out of pocket for a property damage claim?": {
+    "category": "Co-insurance",
+    "tier": null
+  },
+  "How much flood coverage do I get on Platinum for my Buildings?": {
+    "category": "Flood",
+    "tier": "Platinum"
+  },
+  "How much of my hospital bill do I have to cover under Silver?": {
+    "category": "Co-insurance",
+    "tier": "Silver"
+  },
+  "How soon after joining can I claim for getting sick?": {
+    "category": "Waiting Period",
+    "tier": null
+  },
+  "If I downgrade my tier, do the waiting periods start over?": {
+    "category": "Tier Upgrade or Downgrade",
+    "tier": null
+  },
+  "If I have a second Escape of Water claim, is that a new claim?": {
+    "category": null,
+    "tier": null
+  },
+  "If I upgrade my tier, do the waiting periods start over?": {
+    "category": "Tier Upgrade or Downgrade",
+    "tier": null
+  },
+  "If I'm readmitted to hospital for the same condition within 90 days, is that a new claim?": {
+    "category": "Pre-existing Condition",
+    "tier": null
+  },
+  "If my pipe bursts and I'm Gold tier, what's the most I can claim?": {
+    "category": "Escape of Water",
+    "tier": "Gold"
+  },
+  "Is theft from my car covered?": {
+    "category": "Theft",
+    "tier": null
+  },
+  "Is theft from my house covered if someone broke in?": {
+    "category": "Theft",
+    "tier": null
+  },
+  "Platinum plan flood damage payout for my house structure?": {
+    "category": "Flood",
+    "tier": "Platinum"
+  },
+  "Silver tier Escape of Water Excess amount?": {
+    "category": "Escape of Water",
+    "tier": "Silver"
+  },
+  "Silver tier co-insurance rate?": {
+    "category": "Co-insurance",
+    "tier": "Silver"
+  },
+  "Silver tier theft Excess amount?": {
+    "category": "Theft",
+    "tier": "Silver"
+  },
+  "What happens if I miss a monthly premium payment?": {
+    "category": "Premium Payment, Grace Period, Lapse",
+    "tier": null
+  },
+  "What happens if I miss my annual premium payment?": {
+    "category": "Premium Payment, Grace Period, Lapse",
+    "tier": null
+  },
+  "What is the Co-insurance percentage for Gold tier?": {
+    "category": "Co-insurance",
+    "tier": "Gold"
+  },
+  "What is the Co-insurance percentage for Silver tier?": {
+    "category": "Co-insurance",
+    "tier": "Silver"
+  },
+  "What is the Escape of Water limit for Gold tier?": {
+    "category": "Escape of Water",
+    "tier": "Gold"
+  },
+  "What is the Escape of Water limit for Silver tier?": {
+    "category": "Escape of Water",
+    "tier": "Silver"
+  },
+  "What is the Excess for Escape of Water on Silver tier?": {
+    "category": "Escape of Water",
+    "tier": "Silver"
+  },
+  "What is the Excess for theft on Silver tier?": {
+    "category": "Theft",
+    "tier": "Silver"
+  },
+  "What is the Flood limit for Buildings on Gold tier?": {
+    "category": "Flood",
+    "tier": "Gold"
+  },
+  "What is the maximum payout for Escape of Water on Gold tier?": {
+    "category": "Escape of Water",
+    "tier": "Gold"
+  },
+  "What percentage do I pay myself for medical claims on Silver?": {
+    "category": "Co-insurance",
+    "tier": "Silver"
+  },
+  "What's my annual cap on medical claims if I'm on the Gold plan?": {
+    "category": "Overall Annual Limit",
+    "tier": "Gold"
+  },
+  "What's my deductible for a burst pipe claim if I'm on Silver?": {
+    "category": "Escape of Water",
+    "tier": "Silver"
+  },
+  "What's the flood limit for Buildings under Platinum tier?": {
+    "category": "Flood",
+    "tier": "Platinum"
+  },
+  "What's the total yearly medical coverage limit for Gold tier?": {
+    "category": "Overall Annual Limit",
+    "tier": "Gold"
+  },
+  "What's the waiting period for a general illness claim?": {
+    "category": "Waiting Period",
+    "tier": null
+  },
+  "When does my Section B illness cover become active after I sign up?": {
+    "category": "Waiting Period",
+    "tier": null
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "summary": {
+    "question + terms (before)": {
+      "recall": "12/13",
+      "avg_context_passages": 18.0
+    },
+    "+ terms-only pass (after)": {
+      "recall": "13/13",
+      "avg_context_passages": 21.4
+    }
+  },
+  "questions": [
+    {
+      "question": "My kitchen pipe burst and water damaged my flooring. I'm Silver tier - am I covered, and how much?",
+      "classified_as": {
+        "category": "Escape of Water",
+        "tier": "Silver"
+      },
+      "question + terms (before)": {
+        "found_at": 1,
+        "context_size": 20
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 1,
+        "context_size": 24
+      }
+    },
+    {
+      "question": "What's the excess if water leaks from my washing machine hose? I'm on Gold.",
+      "classified_as": {
+        "category": "Escape of Water",
+        "tier": "Gold"
+      },
+      "question + terms (before)": {
+        "found_at": 4,
+        "context_size": 17
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 4,
+        "context_size": 20
+      }
+    },
+    {
+      "question": "My house flooded in the monsoon. I'm Gold tier, no Special Perils Extension. Am I covered?",
+      "classified_as": {
+        "category": "Flood",
+        "tier": "Gold"
+      },
+      "question + terms (before)": {
+        "found_at": 3,
+        "context_size": 17
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 3,
+        "context_size": 21
+      }
+    },
+    {
+      "question": "How long is the waiting period before I can claim for hospitalisation?",
+      "classified_as": {
+        "category": "Waiting Period",
+        "tier": null
+      },
+      "question + terms (before)": {
+        "found_at": null,
+        "context_size": 20
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 25,
+        "context_size": 25
+      }
+    },
+    {
+      "question": "My phone was stolen from my car in the driveway - what do I claim and how much?",
+      "classified_as": {
+        "category": "Theft",
+        "tier": null
+      },
+      "question + terms (before)": {
+        "found_at": 2,
+        "context_size": 18
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 2,
+        "context_size": 19
+      }
+    },
+    {
+      "question": "Which form do I fill in for water damage?",
+      "classified_as": {
+        "category": null,
+        "tier": null
+      },
+      "question + terms (before)": {
+        "found_at": 1,
+        "context_size": 18
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 1,
+        "context_size": 18
+      }
+    },
+    {
+      "question": "What happens if I pay my premium late?",
+      "classified_as": {
+        "category": "Premium Payment, Grace Period, Lapse",
+        "tier": null
+      },
+      "question + terms (before)": {
+        "found_at": 2,
+        "context_size": 14
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 2,
+        "context_size": 19
+      }
+    },
+    {
+      "question": "How much do you pay per day if I stay in a government hospital? Silver tier.",
+      "classified_as": {
+        "category": "Government Hospital Daily Cash Allowance",
+        "tier": "Silver"
+      },
+      "question + terms (before)": {
+        "found_at": 1,
+        "context_size": 14
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 1,
+        "context_size": 15
+      }
+    },
+    {
+      "question": "A fire made my house unlivable. I'm Gold tier - will you pay for a hotel while it's repaired?",
+      "classified_as": {
+        "category": "Alternative Accommodation",
+        "tier": "Gold"
+      },
+      "question + terms (before)": {
+        "found_at": 5,
+        "context_size": 19
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 5,
+        "context_size": 23
+      }
+    },
+    {
+      "question": "Someone stole my house keys. Do you pay to change the locks? Platinum tier.",
+      "classified_as": {
+        "category": "Replacement of Locks",
+        "tier": "Platinum"
+      },
+      "question + terms (before)": {
+        "found_at": 1,
+        "context_size": 20
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 1,
+        "context_size": 22
+      }
+    },
+    {
+      "question": "I rent my house out and the tenant left after a fire. Silver tier - do you cover the lost rent?",
+      "classified_as": {
+        "category": "Loss of Rent",
+        "tier": "Silver"
+      },
+      "question + terms (before)": {
+        "found_at": 1,
+        "context_size": 19
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 1,
+        "context_size": 24
+      }
+    },
+    {
+      "question": "The plumber had to break open my wall to find a hidden leak. Gold tier - is that covered?",
+      "classified_as": {
+        "category": "Tracing and Access",
+        "tier": "Gold"
+      },
+      "question + terms (before)": {
+        "found_at": 6,
+        "context_size": 20
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 6,
+        "context_size": 22
+      }
+    },
+    {
+      "question": "How soon do I need to tell you about water damage?",
+      "classified_as": {
+        "category": "Claims Process, Documents Required",
+        "tier": null
+      },
+      "question + terms (before)": {
+        "found_at": 5,
+        "context_size": 18
+      },
+      "+ terms-only pass (after)": {
+        "found_at": 5,
+        "context_size": 26
+      }
+    }
+  ]
+}

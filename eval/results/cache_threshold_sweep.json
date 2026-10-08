@@ -1,0 +1,130 @@
+{
+  "sweep": [
+    {
+      "threshold": 0.8,
+      "hit_rate": 0.42424242424242425,
+      "false_hit_hard": 0.5,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.81,
+      "hit_rate": 0.42424242424242425,
+      "false_hit_hard": 0.5,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.82,
+      "hit_rate": 0.42424242424242425,
+      "false_hit_hard": 0.5,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.83,
+      "hit_rate": 0.2727272727272727,
+      "false_hit_hard": 0.5,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.84,
+      "hit_rate": 0.18181818181818182,
+      "false_hit_hard": 0.4,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.85,
+      "hit_rate": 0.15151515151515152,
+      "false_hit_hard": 0.4,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.86,
+      "hit_rate": 0.15151515151515152,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.87,
+      "hit_rate": 0.12121212121212122,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.88,
+      "hit_rate": 0.09090909090909091,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.89,
+      "hit_rate": 0.09090909090909091,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.9,
+      "hit_rate": 0.09090909090909091,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.91,
+      "hit_rate": 0.06060606060606061,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.92,
+      "hit_rate": 0.06060606060606061,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.93,
+      "hit_rate": 0.030303030303030304,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.94,
+      "hit_rate": 0.030303030303030304,
+      "false_hit_hard": 0.3,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.95,
+      "hit_rate": 0.030303030303030304,
+      "false_hit_hard": 0.1,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.96,
+      "hit_rate": 0.0,
+      "false_hit_hard": 0.1,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.97,
+      "hit_rate": 0.0,
+      "false_hit_hard": 0.1,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.98,
+      "hit_rate": 0.0,
+      "false_hit_hard": 0.0,
+      "false_hit_general": 0.0
+    },
+    {
+      "threshold": 0.99,
+      "hit_rate": 0.0,
+      "false_hit_hard": 0.0,
+      "false_hit_general": 0.0
+    }
+  ],
+  "recommended_threshold": 0.98,
+  "n_positive": 33,
+  "n_positive_gate_failed": 3,
+  "n_hard_negative": 10,
+  "n_hard_negative_gate_blocked": 5,
+  "n_general_negative": 267
+}

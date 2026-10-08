@@ -1,0 +1,54 @@
+[
+  {
+    "question": "My kitchen pipe burst and water damaged my flooring. I'm Silver tier - am I covered, and how much?",
+    "target": "Escape of Water (Clause A2.3), per event"
+  },
+  {
+    "question": "What's the excess if water leaks from my washing machine hose? I'm on Gold.",
+    "target": "Escape of Water -- Silver: RM1,000"
+  },
+  {
+    "question": "My house flooded in the monsoon. I'm Gold tier, no Special Perils Extension. Am I covered?",
+    "target": "Flood — Buildings, per Period aggregate"
+  },
+  {
+    "question": "How long is the waiting period before I can claim for hospitalisation?",
+    "target": "B5.1 No benefit"
+  },
+  {
+    "question": "My phone was stolen from my car in the driveway - what do I claim and how much?",
+    "target": "unattended motor vehicle"
+  },
+  {
+    "question": "Which form do I fill in for water damage?",
+    "target": "Form HC-2 (Water Damage Claim)"
+  },
+  {
+    "question": "What happens if I pay my premium late?",
+    "target": "during that grace period"
+  },
+  {
+    "question": "How much do you pay per day if I stay in a government hospital? Silver tier.",
+    "target": "Government Hospital Daily Cash Allowance (Clause B7), per day"
+  },
+  {
+    "question": "A fire made my house unlivable. I'm Gold tier - will you pay for a hotel while it's repaired?",
+    "target": "Alternative Accommodation (Clause A3.3)"
+  },
+  {
+    "question": "Someone stole my house keys. Do you pay to change the locks? Platinum tier.",
+    "target": "Replacement of Locks (Clause A3.6)"
+  },
+  {
+    "question": "I rent my house out and the tenant left after a fire. Silver tier - do you cover the lost rent?",
+    "target": "Loss of Rent (Clause A3.7) --"
+  },
+  {
+    "question": "The plumber had to break open my wall to find a hidden leak. Gold tier - is that covered?",
+    "target": "Tracing and Access (Clause A3.2), per Period"
+  },
+  {
+    "question": "How soon do I need to tell you about water damage?",
+    "target": "Escape of Water -- Police report: Not required"
+  }
+]

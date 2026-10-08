@@ -1,0 +1,16 @@
+.env
+.git/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+data/index/
+data/conversations.db
+data/cache.json
+data/cache_log.jsonl
+
+*.pdf
+eval/
+*.md
