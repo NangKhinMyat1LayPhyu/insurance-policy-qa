@@ -11,6 +11,5 @@ data/conversations.db
 data/cache.json
 data/cache_log.jsonl
 
-*.pdf
 eval/
 *.md

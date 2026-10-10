@@ -6,8 +6,10 @@ services:
     env_file: .env
     environment:
       CONVERSATIONS_DB: /app/logs/conversations.db
+      LIBRARY_DIR: /app/library
     volumes:
       - logs:/app/logs
+      - library:/app/library
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
       interval: 30s
@@ -19,14 +21,18 @@ services:
     command: ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
     ports:
       - "8501:8501"
+    env_file: .env
     environment:
       CONVERSATIONS_DB: /app/logs/conversations.db
+      LIBRARY_DIR: /app/library
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
       STREAMLIT_BROWSER_GATHER_USAGE_STATS: "false"
     volumes:
       - logs:/app/logs
+      - library:/app/library
     depends_on:
       - app
 
 volumes:
   logs:
+  library:

@@ -31,12 +31,8 @@ flowchart LR
     F --> D[(Log)] --> B[Admin dashboard]
 ```
 
-- **Table-aware PDF parsing:** every benefits-table row keeps its Silver/Gold/Platinum headers, and every chunk is tagged with its document and policy section.
-- **Hybrid retrieval:** vector and keyword search, guided by a classifier that maps plain language to policy terms ("burst pipe" → *Escape of Water*).
-- **Conversation memory:** follow-ups like "which form do I use for that?" are rewritten into complete questions from the recent conversation, so search and the cache always see the full question.
+- **Table-aware PDF parsing:** every benefits-table row keeps its Silver/Gold/Platinum headers, and every passage is tagged with its document and policy section.
 - **Grounded answers:** exclusions are checked before amounts, the contract outranks the summary, and every fact is cited.
-- **A safe semantic cache:** an answer is reused only for the same policy term and tier.
-- **Escalation:** a conversation is flagged for staff when the documents don't answer it or the customer asks for a person.
 
 ## Results
 
@@ -55,13 +51,13 @@ flowchart LR
 
 ## Admin dashboard
 
-Headline numbers, a "needs a human" queue with resolve/reopen, searchable conversation transcripts, and topic insights.
+Headline numbers, a "needs a human" queue, searchable conversation transcripts, and topic insights.
 
 <img src="image/dashboard-needs-human.png" alt="Dashboard headline numbers and the needs-a-human queue" width="700">
 
-| Conversations | Insights |
-|---|---|
-| <img src="image/dashboard-conversations.png" alt="Conversation list" width="400"> | <img src="image/dashboard-insights.png" alt="Questions per day and top topics" width="400"> |
+**Updating documents:** an admin uploads a new version of a policy PDF, reviews a check report and a side-by-side comparison of answers, then publishes. The bot switches without a restart, and earlier versions can be restored in one click.
+
+<img src="image/documents-compare.png" alt="The same questions answered by the live and the new version of the Policy Wording" width="700">
 
 ## Run it
 

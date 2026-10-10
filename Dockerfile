@@ -17,6 +17,7 @@ COPY src/ src/
 COPY server/ server/
 COPY dashboard/ dashboard/
 COPY data/chunks.json data/chunks.json
+COPY 01_Product_Disclosure_Sheet.pdf 02_Policy_Wording.pdf 03_Benefits_Schedule.pdf 04_Claims_Procedure_Guide.pdf ./
 
 RUN python src/index.py
 

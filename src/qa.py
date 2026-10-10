@@ -10,10 +10,11 @@ from google import genai
 from google.genai import errors, types
 from langchain_community.retrievers import BM25Retriever
 from langchain_community.vectorstores import FAISS
-from langchain_core.documents import Document
 
 import cache
-from index import CHUNKS_FILE, INDEX_DIR, get_embedder
+import library
+from index import chunks_to_documents, get_embedder
+from ingest import DOC_LABELS
 from terms import classify_question, search_terms
 
 load_dotenv()
@@ -31,12 +32,6 @@ SECTION_LABELS = {"A": "Section A / HomeCare", "B": "Section B / Health", None: 
 
 QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
-DOC_LABELS = {
-    "product_disclosure_sheet": "Product Disclosure Sheet",
-    "policy_wording": "Policy Wording",
-    "benefits_schedule": "Benefits Schedule",
-    "claims_procedure_guide": "Claims Procedure Guide",
-}
 
 SYSTEM_PROMPT = """You answer questions about an insurance policy (the Kasturi HomeCare & Health Plan, a SYNTHETIC product used for testing only) using ONLY the context passages provided by the user.
 
@@ -97,38 +92,40 @@ def rewrite_with_history(question, history, model=MODEL):
     return rewritten
 
 
-@lru_cache(maxsize=1)
-def load_store():
-    if not (INDEX_DIR / "index.faiss").exists():
-        raise SystemExit(f"No FAISS index in {INDEX_DIR}/ — run `python src/index.py` first.")
-    return FAISS.load_local(str(INDEX_DIR), get_embedder(), allow_dangerous_deserialization=True)
+@lru_cache(maxsize=4)
+def _load_store(index_dir):
+    return FAISS.load_local(index_dir, get_embedder(), allow_dangerous_deserialization=True)
 
 
-@lru_cache(maxsize=1)
-def load_bm25():
-    if not CHUNKS_FILE.exists():
-        raise SystemExit(f"No {CHUNKS_FILE} — run `python src/ingest.py` first.")
-    raw_chunks = json.loads(CHUNKS_FILE.read_text(encoding="utf-8"))
-    documents = [
-        Document(
-            page_content=c["text"],
-            metadata={"doc_type": c["doc_type"], "source_file": c["source_file"], "page": c["page"], "kind": c["kind"], "section": c.get("section")},
-        )
-        for c in raw_chunks
-    ]
-    retriever = BM25Retriever.from_documents(documents)
+@lru_cache(maxsize=4)
+def _load_bm25(chunks_file):
+    raw_chunks = json.loads(Path(chunks_file).read_text(encoding="utf-8"))
+    retriever = BM25Retriever.from_documents(chunks_to_documents(raw_chunks))
     retriever.k = BM25_K
     return retriever
 
 
-def retrieve(question, question_terms=None, terms_k=None):
+def load_store(index_dir):
+    if not (Path(index_dir) / "index.faiss").exists():
+        raise SystemExit(f"No FAISS index in {index_dir}/ — run `python src/index.py` first.")
+    return _load_store(str(index_dir))
+
+
+def load_bm25(chunks_file):
+    if not Path(chunks_file).exists():
+        raise SystemExit(f"No {chunks_file} — run `python src/ingest.py` first.")
+    return _load_bm25(str(chunks_file))
+
+
+def retrieve(question, question_terms=None, terms_k=None, release=None):
     classification = question_terms if question_terms is not None else classify_question(question)
     terms = search_terms(classification)
     search_query = f"{question} {terms}".strip()
     terms_k = TERMS_K if terms_k is None else terms_k
 
-    store = load_store()
-    bm25 = load_bm25()
+    chunks_file, index_dir = library.paths_for(release) if release else library.active_paths()
+    store = load_store(index_dir)
+    bm25 = load_bm25(chunks_file)
     vector_hits = store.similarity_search_with_score(QUERY_PREFIX + search_query, k=VECTOR_K)
     keyword_hits = bm25.invoke(search_query)
     if terms and terms_k:
@@ -157,18 +154,21 @@ def format_context(hits):
     return "\n\n---\n\n".join(blocks)
 
 
-def answer(question, model=MODEL, use_cache=True, cache_threshold=None):
+def answer(question, model=MODEL, use_cache=True, cache_threshold=None, release=None):
     if not (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
         raise SystemExit("No GEMINI_API_KEY found. Add it to .env (see .env.example).")
 
     question_terms = classify_question(question)
+
+    if release is not None:
+        use_cache = False
 
     if use_cache:
         result = cache.lookup(question, threshold=cache_threshold or cache.DEFAULT_THRESHOLD, question_terms=question_terms)
         if result["hit"]:
             return result["answer"], [], {**result, **question_terms}
 
-    hits = retrieve(question, question_terms=question_terms)
+    hits = retrieve(question, question_terms=question_terms, release=release)
 
     client = genai.Client()
     response = client.models.generate_content(

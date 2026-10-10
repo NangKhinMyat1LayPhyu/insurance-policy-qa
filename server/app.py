@@ -13,6 +13,7 @@ from pydantic import BaseModel
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+import library
 import qa
 
 from server.db import init_db, log_message, recent_turns
@@ -22,6 +23,7 @@ from server.escalation import flag_reason
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
+    library.ensure_initialized()
     yield
 
 

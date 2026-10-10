@@ -16,11 +16,12 @@ TABLE_SETTINGS = {
 }
 
 DOCUMENTS = [
-    {"file": "01_Product_Disclosure_Sheet.pdf", "doc_type": "product_disclosure_sheet"},
-    {"file": "02_Policy_Wording.pdf", "doc_type": "policy_wording"},
-    {"file": "03_Benefits_Schedule.pdf", "doc_type": "benefits_schedule"},
-    {"file": "04_Claims_Procedure_Guide.pdf", "doc_type": "claims_procedure_guide"},
+    {"file": "01_Product_Disclosure_Sheet.pdf", "doc_type": "product_disclosure_sheet", "label": "Product Disclosure Sheet"},
+    {"file": "02_Policy_Wording.pdf", "doc_type": "policy_wording", "label": "Policy Wording"},
+    {"file": "03_Benefits_Schedule.pdf", "doc_type": "benefits_schedule", "label": "Benefits Schedule"},
+    {"file": "04_Claims_Procedure_Guide.pdf", "doc_type": "claims_procedure_guide", "label": "Claims Procedure Guide"},
 ]
+DOC_LABELS = {doc["doc_type"]: doc["label"] for doc in DOCUMENTS}
 
 SECTION_MARKERS = [
     (re.compile(r"Part 3\s*.\s*Section A: HomeCare"), "A"),
@@ -87,9 +88,10 @@ def table_rows_as_chunks(table, doc_type, file, page_num, section):
     return chunks
 
 
-def extract_document(file, doc_type, splitter):
+def extract_document(path, doc_type, splitter):
+    path = Path(path)
+    file = path.name
     chunks = []
-    path = ROOT / file
     current_section = None
     with pdfplumber.open(path) as pdf:
         for page_num, page in enumerate(pdf.pages, start=1):
@@ -125,15 +127,24 @@ def extract_document(file, doc_type, splitter):
     return chunks
 
 
-def main():
+def build_chunks(doc_paths):
     splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
     all_chunks = []
     for doc in DOCUMENTS:
-        doc_chunks = extract_document(doc["file"], doc["doc_type"], splitter)
+        all_chunks.extend(extract_document(doc_paths[doc["doc_type"]], doc["doc_type"], splitter))
+    return all_chunks
+
+
+def default_doc_paths():
+    return {doc["doc_type"]: ROOT / doc["file"] for doc in DOCUMENTS}
+
+
+def main():
+    all_chunks = build_chunks(default_doc_paths())
+    for doc in DOCUMENTS:
+        doc_chunks = [c for c in all_chunks if c["doc_type"] == doc["doc_type"]]
         n_tables = sum(1 for c in doc_chunks if c["kind"] == "table_row")
-        n_prose = sum(1 for c in doc_chunks if c["kind"] == "prose")
-        print(f"  {doc['file']:35s} {len(doc_chunks):4d} chunks ({n_tables} table rows, {n_prose} prose)")
-        all_chunks.extend(doc_chunks)
+        print(f"  {doc['file']:35s} {len(doc_chunks):4d} chunks ({n_tables} table rows, {len(doc_chunks) - n_tables} prose)")
 
     CHUNKS_FILE.parent.mkdir(parents=True, exist_ok=True)
     CHUNKS_FILE.write_text(json.dumps(all_chunks, indent=2), encoding="utf-8")

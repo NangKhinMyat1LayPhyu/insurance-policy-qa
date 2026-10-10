@@ -5,7 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
-from index import CHUNKS_FILE, get_embedder
+from index import get_embedder
+from library import active_chunks_file
 from terms import classify_question
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,9 +17,10 @@ DEFAULT_THRESHOLD = 0.98
 
 
 def doc_version():
-    if not CHUNKS_FILE.exists():
+    chunks_file = active_chunks_file()
+    if not chunks_file.exists():
         return "no-chunks"
-    return hashlib.sha256(CHUNKS_FILE.read_bytes()).hexdigest()[:16]
+    return hashlib.sha256(chunks_file.read_bytes()).hexdigest()[:16]
 
 
 def load_cache():

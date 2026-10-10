@@ -32,12 +32,8 @@ def get_embedder():
     return BGEEmbeddings()
 
 
-def main():
-    if not CHUNKS_FILE.exists():
-        raise SystemExit(f"{CHUNKS_FILE} not found — run `python src/ingest.py` first.")
-    raw_chunks = json.loads(CHUNKS_FILE.read_text(encoding="utf-8"))
-
-    documents = [
+def chunks_to_documents(chunks):
+    return [
         Document(
             page_content=c["text"],
             metadata={
@@ -48,15 +44,23 @@ def main():
                 "section": c.get("section"),
             },
         )
-        for c in raw_chunks
+        for c in chunks
     ]
 
-    print(f"Embedding {len(documents)} chunks with {MODEL_NAME} (batch_size={BATCH_SIZE})...")
-    store = FAISS.from_documents(documents, get_embedder())
 
-    INDEX_DIR.mkdir(parents=True, exist_ok=True)
-    store.save_local(str(INDEX_DIR))
-    print(f"Saved FAISS index to {INDEX_DIR.relative_to(ROOT)}/ ({len(documents)} vectors)")
+def build_index(chunks, out_dir):
+    store = FAISS.from_documents(chunks_to_documents(chunks), get_embedder())
+    Path(out_dir).mkdir(parents=True, exist_ok=True)
+    store.save_local(str(out_dir))
+
+
+def main():
+    if not CHUNKS_FILE.exists():
+        raise SystemExit(f"{CHUNKS_FILE} not found — run `python src/ingest.py` first.")
+    raw_chunks = json.loads(CHUNKS_FILE.read_text(encoding="utf-8"))
+    print(f"Embedding {len(raw_chunks)} chunks with {MODEL_NAME} (batch_size={BATCH_SIZE})...")
+    build_index(raw_chunks, INDEX_DIR)
+    print(f"Saved FAISS index to {INDEX_DIR.relative_to(ROOT)}/ ({len(raw_chunks)} vectors)")
 
 
 if __name__ == "__main__":
