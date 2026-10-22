@@ -1,3 +1,7 @@
+"""Answer a question from the policy documents: classify it, run hybrid search
+(FAISS + BM25), then ask Gemini for a grounded answer that cites every fact.
+"""
+
 import argparse
 import json
 import os
@@ -20,11 +24,14 @@ from terms import classify_question, search_terms
 load_dotenv()
 
 MODEL = "gemini-3.5-flash-lite"
+# Hybrid search: embeddings alone missed table rows, so BM25 keyword hits are added.
 VECTOR_K = 10
 BM25_K = 10
-TERMS_K = 5
+TERMS_K = 5  # extra hits from searching the policy term alone ("pipe burst" -> "Escape of Water")
+# Thinking tokens count against this budget; at 1024, answers were cut off mid-sentence.
 MAX_TOKENS = 4096
 
+# Shown instead of an unfinished answer, which could drop the exclusion that decides coverage.
 INCOMPLETE_ANSWER = "Sorry, I couldn't put together a complete answer to that just now. Please try asking again."
 
 
@@ -53,6 +60,7 @@ Rules:
 - Be concise."""
 
 
+# Follow-ups are rewritten into standalone questions before the pipeline runs.
 HISTORY_TURNS = 3
 HISTORY_ANSWER_CHARS = 600
 
@@ -67,6 +75,11 @@ Rules:
 
 
 def rewrite_with_history(question, history, model=MODEL):
+    """`history` is a list of (question, answer) pairs, oldest first. With no
+    history the question is returned as-is and no LLM call is made. If the
+    rewrite doesn't come back cleanly, fall back to the original question --
+    the same behaviour the bot had before it had memory.
+    """
     if not history:
         return question
 
@@ -92,6 +105,7 @@ def rewrite_with_history(question, history, model=MODEL):
     return rewritten
 
 
+# Keyed by path: the live document set can change while the server is running.
 @lru_cache(maxsize=4)
 def _load_store(index_dir):
     return FAISS.load_local(index_dir, get_embedder(), allow_dangerous_deserialization=True)
@@ -118,6 +132,14 @@ def load_bm25(chunks_file):
 
 
 def retrieve(question, question_terms=None, terms_k=None, release=None):
+    """Union of vector search (semantic) and BM25 (exact keyword) hits, deduped by
+    text. Searches both the original question and its classified canonical
+    category/tier (see terms.py) so a chunk that only shares vocabulary with
+    the technical term -- not the customer's plain phrasing -- still has a
+    chance to be found. `question_terms` lets answer() pass in a
+    classification it already ran for the cache check, avoiding a second
+    identical call.
+    """
     classification = question_terms if question_terms is not None else classify_question(question)
     terms = search_terms(classification)
     search_query = f"{question} {terms}".strip()
@@ -158,8 +180,10 @@ def answer(question, model=MODEL, use_cache=True, cache_threshold=None, release=
     if not (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
         raise SystemExit("No GEMINI_API_KEY found. Add it to .env (see .env.example).")
 
+    # Classified once, shared by the cache gate and query expansion.
     question_terms = classify_question(question)
 
+    # An unpublished release never reads from or writes to the live cache.
     if release is not None:
         use_cache = False
 
@@ -194,7 +218,7 @@ def answer(question, model=MODEL, use_cache=True, cache_threshold=None, release=
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Insurance document Q&A (Stage 1+2).")
+    parser = argparse.ArgumentParser(description="Ask a question about the insurance policy documents.")
     parser.add_argument("question", help="the question to answer")
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--no-cache", action="store_true", help="skip the semantic cache")

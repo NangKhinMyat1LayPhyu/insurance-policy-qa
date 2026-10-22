@@ -1,3 +1,7 @@
+"""Classify a question into the policy's own terms (category and tier). Used to expand
+search queries and to stop the cache matching near-miss questions.
+"""
+
 import sys
 import time
 
@@ -58,6 +62,11 @@ tier: <Silver, Gold, Platinum, or none>"""
 
 
 def classify_question(question, model=MODEL, retries=4):
+    """Returns {"category": str|None, "tier": str|None}. None values mean
+    "unknown" (call failed, or the model's answer didn't parse) -- callers
+    must treat unknown as never matching anything (see cache.py's gate,
+    which fails CLOSED: a missed cache hit is cheap, a wrong one is not).
+    """
     for attempt in range(retries):
         try:
             client = genai.Client()
@@ -106,5 +115,10 @@ def _parse(text):
 
 
 def search_terms(classification):
+    """A short string for retrieval query expansion -- category and tier are
+    exactly the words used in the Benefits Schedule/Policy Wording
+    themselves, so this doubles as good BM25 keyword bait, not just a cache
+    concern.
+    """
     parts = [p for p in (classification.get("category"), classification.get("tier")) if p]
     return ", ".join(parts)

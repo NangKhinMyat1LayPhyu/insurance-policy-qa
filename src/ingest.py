@@ -1,3 +1,7 @@
+"""Parse the policy PDFs into clean chunks tagged with document, page and policy section.
+Benefits-table rows keep their Silver / Gold / Platinum headers.
+"""
+
 import json
 import re
 from pathlib import Path
@@ -23,6 +27,7 @@ DOCUMENTS = [
 ]
 DOC_LABELS = {doc["doc_type"]: doc["label"] for doc in DOCUMENTS}
 
+# Section A (property) and B (health) amounts must never be mixed, so chunks carry their section.
 SECTION_MARKERS = [
     (re.compile(r"Part 3\s*.\s*Section A: HomeCare"), "A"),
     (re.compile(r"Part 4\s*.\s*Section B: Health"), "B"),
@@ -46,6 +51,7 @@ def detect_section(page_text, current):
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 100
 
+# Repeated page headers and footers are removed so they don't dominate every chunk's embedding.
 BOILERPLATE_PATTERNS = [
     re.compile(r"^L\s*U\s*M\s*I\s*N\s*A.*$", re.MULTILINE),
     re.compile(r"^Lumina Kasturi Assurance Berhad.*SYNTHETIC.*$", re.MULTILINE),
@@ -128,6 +134,10 @@ def extract_document(path, doc_type, splitter):
 
 
 def build_chunks(doc_paths):
+    """`doc_paths` maps each doc_type to its PDF. Returns all chunks, in
+    DOCUMENTS order. Used both for the repo's own PDFs (main) and for a set
+    of documents staged from the admin dashboard (library.py).
+    """
     splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
     all_chunks = []
     for doc in DOCUMENTS:

@@ -1,3 +1,5 @@
+"""Embed the document chunks and build the FAISS vector index."""
+
 from functools import lru_cache
 from pathlib import Path
 import json
@@ -29,6 +31,10 @@ class BGEEmbeddings(Embeddings):
 
 @lru_cache(maxsize=1)
 def get_embedder():
+    """One shared model instance per process -- used by both the FAISS store
+    and the semantic cache, so a script that needs both (qa.py)
+    doesn't load BAAI/bge-small-en-v1.5 into memory twice.
+    """
     return BGEEmbeddings()
 
 

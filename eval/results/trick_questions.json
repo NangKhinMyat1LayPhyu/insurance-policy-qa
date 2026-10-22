@@ -1,0 +1,186 @@
+{
+  "summary": {
+    "passed": "19/21",
+    "per_question": {
+      "Burst pipe, Silver: covered, RM25,000 limit, RM1,000 Excess": "7/7",
+      "Flood, Gold, no Special Perils Extension: not covered": "7/7",
+      "Phone stolen from car in driveway: not covered (exclusion for unattended vehicles / open areas)": "5/7"
+    },
+    "model": "gemini-3.5-flash-lite",
+    "cache": "off"
+  },
+  "questions": [
+    {
+      "name": "Burst pipe, Silver: covered, RM25,000 limit, RM1,000 Excess",
+      "question": "My kitchen pipe burst and water damaged my flooring. I'm Silver tier — am I covered, and how much?",
+      "passed": "7/7",
+      "runs": [
+        {
+          "run": 1,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, damage from a burst kitchen pipe is classified as an \"Escape of Water\" under Section A (HomeCare), which is a covered peril. (Source: Policy Wording, page 2; Benefits Schedule, page 2)\n\nFor the Silver tier, the coverage limit for Escape of Water (Clause A2.3) is RM25,000 per event. (Source: Benefits Schedule, page 2) However, you must check exclusions (such as those regarding gradual deterioration or unoccupation) before a final claim amount is confirmed. Additionally, an Escape of Water Excess of RM1,000 applies to the Silver tier, which will be deducted from the claim. (Source: Benefits Schedule, page 3) The cost of repairing the burst pipe itself is not recoverable under Section A. (Source: Claims Procedure Guide, page 2)\n\n*Note: This is not a claims decision.*"
+        },
+        {
+          "run": 2,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, damage from a burst kitchen pipe falls under \"Escape of Water\" (Clause A2.3), which is a Section A (HomeCare) property matter (Source: Benefits Schedule, page 2). \n\nFor the Silver tier, the per-event limit for Escape of Water is RM25,000 (Source: Benefits Schedule, page 2). However, coverage is subject to checking policy exclusions—such as whether the damage resulted from gradual deterioration or unoccupancy—and an applicable Escape of Water Excess of RM1,000 for the Silver tier is deducted from the claim (Source: Benefits Schedule, page 3; Policy Wording, page 10). \n\n*(Note: This is not a claims decision.)*"
+        },
+        {
+          "run": 3,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Yes, damage from a burst kitchen pipe is covered as an \"Escape of Water\" under the Silver tier, provided the damage is sudden and was not continuing or reasonably detectable for more than 14 days before it was discovered (Source: Policy Wording, page 2; Policy Wording, page 10). \n\nFor the Silver tier, the coverage limit for Escape of Water is RM25,000 per event (Source: Benefits Schedule, page 2). However, an Escape of Water Excess of RM1,000 applies and will be deducted from the payout (Source: Benefits Schedule, page 3). \n\n*(Note: This sounds like an actual claim.)*"
+        },
+        {
+          "run": 4,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, damage from a burst kitchen pipe falls under \"Escape of Water\" (Clause A2.3), which is a Section A (HomeCare) property matter. \n\nFor the Silver tier, the per-event limit for Escape of Water is RM25,000 (Source: Benefits Schedule, page 2). However, coverage is subject to policy exclusions (such as those concerning gradual deterioration or unoccupied premises) and an applicable Escape of Water Excess of RM1,000 for the Silver tier (Source: Benefits Schedule, page 3). \n\n*(Note: This is not a claims decision.)*"
+        },
+        {
+          "run": 5,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, damage from a burst kitchen pipe is classified as an \"Escape of Water\" under Section A (HomeCare) of the policy (Source: Benefits Schedule, page 2). \n\nFor a policyholder on the Silver tier, the coverage limit for Escape of Water (Clause A2.3) is RM25,000 per event (Source: Benefits Schedule, page 2). However, this coverage is subject to specific exclusions and conditions detailed in the Policy Wording (such as those regarding gradual deterioration or unoccupation) (Source: Policy Wording, page 10). Additionally, an Escape of Water excess of RM1,000 applies to the Silver tier (Source: Benefits Schedule, page 3).\n\n*Note: This is not a claims decision.*"
+        },
+        {
+          "run": 6,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Under the Silver tier, damage to your fixed flooring caused by a burst kitchen pipe is covered as an \"Escape of Water\" (Source: Policy Wording, page 2; Benefits Schedule, page 2). However, the cost of repairing or replacing the pipe itself is not covered (Source: Claims Procedure Guide, page 2). \n\nThe per-event limit for Escape of Water under the Silver tier is RM25,000, and it is subject to an Escape of Water Excess of RM1,000 (Source: Benefits Schedule, page 2; Benefits Schedule, page 3). \n\n*(Note: This is not a formal claims decision.)*"
+        },
+        {
+          "run": 7,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, damage from a burst kitchen pipe is classified as an \"Escape of Water,\" which is covered under Section A (HomeCare) of the policy (Source: Benefits Schedule, page 2; Policy Wording, page 2). \n\nFor the Silver tier, the coverage limit for Escape of Water (Clause A2.3) is RM25,000 per event (Source: Benefits Schedule, page 2). However, this is subject to the applicable Escape of Water Excess of RM1,000, which will be deducted from the claim (Source: Benefits Schedule, page 3; Claims Procedure Guide, page 2). \n\nAdditionally, coverage is subject to policy exclusions, such as ensuring the damage was not caused by gradual deterioration or continuous leaking for more than 14 days before discovery (Source: Policy Wording, page 10). \n\n*(Note: This is not a claims decision.)*"
+        }
+      ]
+    },
+    {
+      "name": "Flood, Gold, no Special Perils Extension: not covered",
+      "question": "My house flooded in the monsoon. I'm Gold tier, no Special Perils Extension. Am I covered?",
+      "passed": "7/7",
+      "runs": [
+        {
+          "run": 1,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "You are not covered for flood damage because your policy does not have the Special Perils Extension endorsed, which is required for Flood cover under Section A (Source: Policy Wording, page 6; Benefits Schedule, page 2). \n\n*(Note: This response addresses a potential claim scenario.)*"
+        },
+        {
+          "run": 2,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "You are not covered for flood damage because you do not have the Special Perils Extension endorsed on your policy (Source: Policy Wording, page 6). Under this plan, Flood is not part of the basic cover and is only included where the Policy Schedule states that the Special Perils Extension applies (Source: Policy Wording, page 6; Product Disclosure Sheet, page 1). \n\n*(Note: While this sounds like an insurance claim, please note that this is not a formal claims decision.)*"
+        },
+        {
+          "run": 3,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the documents provided, damage solely caused by Flood is not covered because you do not have the Special Perils Extension endorsed on your Policy Schedule (Source: Policy Wording, page 6; Benefits Schedule, page 2). For the Gold tier, the Special Perils Extension is optional and must be specifically endorsed for Flood to be included in your cover (Source: Benefits Schedule, page 2). \n\n*(Note: This response is not a formal claims decision.)*"
+        },
+        {
+          "run": 4,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "You are not covered for flood damage because your Policy Schedule does not show the Special Perils Extension (Source: Policy Wording, page 6). Under the policy, Flood is an insured peril only where the Policy Schedule states that the Special Perils Extension applies (Source: Policy Wording, page 6). For the Gold tier, the Special Perils Extension is optional and must be endorsed on the Policy Schedule for an additional premium (Source: Benefits Schedule, page 2). \n\n*Note: This response is an explanation of policy terms and does not constitute a formal claims decision.*"
+        },
+        {
+          "run": 5,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "You are not covered for flood damage. Under the Policy Wording, Flood is only covered where the Special Perils Extension applies (Source: Policy Wording, page 6). For the Gold tier, the Special Perils Extension is optional and only applies if it is endorsed on your Policy Schedule (Source: Benefits Schedule, page 2). Because you do not have the Special Perils Extension, damage caused by flood is not covered. \n\n*(Note: This sounds like an actual claim scenario.)*"
+        },
+        {
+          "run": 6,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, you are **not covered** for flood damage because you do not have the Special Perils Extension endorsed on your policy. \n\nUnder the Policy Wording, Flood is not included in the basic Insured Perils and requires the Special Perils Extension (Clause A4.1) (Source: Policy Wording, page 6). The Benefits Schedule confirms that for the Gold tier, the Special Perils Extension is optional and only applies if it is endorsed on the Policy Schedule for an additional premium (Source: Benefits Schedule, page 2). Furthermore, the Product Disclosure Sheet notes that flood cover is not part of the basic cover and depends on whether the extension is shown as endorsed (Source: Product Disclosure Sheet, page 1). \n\n*(Note: This response is for informational purposes based on your policy terms and does not constitute a formal claims decision.)*"
+        },
+        {
+          "run": 7,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, you are **not covered** for flood damage because you do not have the Special Perils Extension endorsed on your policy. \n\nAccording to Policy Wording Section A4.1, Flood is only covered where the Policy Schedule states that the Special Perils Extension applies (Source: Policy Wording, page 6). Furthermore, the Product Disclosure Sheet notes that the Special Perils Extension is not part of basic cover and must be endorsed (Source: Product Disclosure Sheet, page 1), and the Claims Procedure Guide states that a Catastrophe Event declaration \"does not provide Flood cover to a Policyholder whose Policy Schedule does not show the Special Perils Extension\" (Source: Claims Procedure Guide, page 1).\n\n*(Note: This response is for informational purposes regarding your policy terms and is not an official claims decision.)*"
+        }
+      ]
+    },
+    {
+      "name": "Phone stolen from car in driveway: not covered (exclusion for unattended vehicles / open areas)",
+      "question": "My phone was stolen from my car in the driveway — what do I claim and how much?",
+      "passed": "5/7",
+      "runs": [
+        {
+          "run": 1,
+          "pass": false,
+          "incomplete": false,
+          "missing": [
+            "not covered / isn't covered / is not covered / would not be covered / excluded from coverage / cannot claim / can't claim / nothing can be claimed"
+          ],
+          "answer": "To answer your question, we need to know your policy tier (Silver, Gold, or Platinum) and whether the phone is classified as Valuables under the policy. \n\nUnder the policy exclusions, loss of Valuables from any unattended motor vehicle is excluded (Source: Policy Wording, page 10). If the phone is not classified as Valuables, coverage for theft of Contents generally requires forcible and violent entry into or exit from the Buildings, or may be subject to specific limitations for items in areas that are not fully enclosed and lockable (Source: Policy Wording, page 10). \n\nPlease note that this is not a claims decision."
+        },
+        {
+          "run": 2,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, the loss of valuables from an unattended motor vehicle is excluded from coverage (Source: Policy Wording, page 10). Additionally, theft of contents from a car porch or area that is not fully enclosed and lockable is excluded (Source: Policy Wording, page 10). \n\nFurthermore, determining any potential claim amount depends on your policy tier (Silver, Gold, or Platinum), which was not stated in your question (Source: Benefits Schedule, page 3). Please provide your tier if you wish to check other applicable provisions.\n\n*Note: This is not a formal claims decision.*"
+        },
+        {
+          "run": 3,
+          "pass": false,
+          "incomplete": false,
+          "missing": [
+            "not covered / isn't covered / is not covered / would not be covered / excluded from coverage / cannot claim / can't claim / nothing can be claimed"
+          ],
+          "answer": "Based on the provided documents, the tier of your policy is missing, which is required to determine coverage amounts (Source: Benefits Schedule, page 3). Additionally, Clause 5.2.6 excludes the loss of Valuables from any unattended motor vehicle (Source: Policy Wording, page 10), though the provided documents do not define whether a phone is considered a \"Valuables\" item. \n\n*(Note: This sounds like an actual claim situation, but no claims decision is being made here.)*"
+        },
+        {
+          "run": 4,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, loss of Valuables from any unattended motor vehicle is excluded from coverage (Source: Policy Wording, page 10). Because the phone was stolen from a car, the claim is excluded and nothing can be claimed. \n\n*(Note: This is not a formal claims decision.)*"
+        },
+        {
+          "run": 5,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, the loss is not covered. Under Policy Wording Section 5.2.6, the loss of Valuables from any unattended motor vehicle is expressly excluded, and Section 5.2.5 excludes theft of Contents from any area of the insured premises that is not fully enclosed and lockable (Source: Policy Wording, page 10). \n\n*(Note: This response addresses a scenario that sounds like an actual claim, but the policy terms exclude it.)*"
+        },
+        {
+          "run": 6,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the provided documents, the loss is not covered because it falls under specific policy exclusions. \n\nUnder Clause 5.2.5, theft of Contents from any car porch, garden, balcony, open verandah, or other area of the Insured Premises that is not fully enclosed and lockable is excluded (Source: Policy Wording, page 10). Furthermore, Clause 5.2.6 excludes the loss of Valuables from any unattended motor vehicle (Source: Policy Wording, page 10). Because of these exclusions, you cannot claim for the theft of your phone from a car in the driveway.\n\n*(Note: This is not a formal claims decision.)*"
+        },
+        {
+          "run": 7,
+          "pass": true,
+          "incomplete": false,
+          "missing": [],
+          "answer": "Based on the policy documents provided, the loss of valuables (such as a phone) from an unattended motor vehicle is expressly excluded from coverage under Clause 5.2.6 (Source: Policy Wording, page 10). Therefore, you cannot claim for this loss. \n\n*(Note: This is not a formal claims decision.)*"
+        }
+      ]
+    }
+  ]
+}

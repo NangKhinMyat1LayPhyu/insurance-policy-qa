@@ -1,3 +1,5 @@
+"""Decide when a conversation needs a human instead of the bot."""
+
 import re
 
 import qa
@@ -6,6 +8,7 @@ ASKED_FOR_HUMAN = "Customer asked for a person"
 NOT_IN_DOCUMENTS = "Documents don't answer it"
 INCOMPLETE = "Bot couldn't finish an answer"
 
+# The exact refusal qa.py's system prompt tells the model to use.
 DECLINE_PHRASE = "the provided documents do not answer this"
 
 HUMAN_REQUEST = re.compile(
@@ -17,6 +20,7 @@ HUMAN_REQUEST = re.compile(
 
 
 def flag_reason(question, answer, info):
+    """Why this exchange needs a human, or None if the bot handled it."""
     if HUMAN_REQUEST.search(question):
         return ASKED_FOR_HUMAN
     if info.get("incomplete") or answer == qa.INCOMPLETE_ANSWER:

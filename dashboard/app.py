@@ -1,3 +1,9 @@
+"""Admin dashboard: what customers asked, what the bot couldn't answer, what people ask
+about most, and the policy documents the bot answers from.
+"""
+
+import hmac
+import html
 import os
 import sqlite3
 import sys
@@ -16,6 +22,8 @@ import library
 from ingest import DOC_LABELS, DOCUMENTS
 from server.db import DB_FILE, init_db, set_resolved
 
+# Questions for the old-vs-new comparison when reviewing a replaced document.
+# Each one costs two Gemini answers (live and new), so keep the list short.
 DEFAULT_TEST_QUESTIONS = """How long is the waiting period for a Specified Illness?
 Water leaked from a pipe for 10 days before I noticed it. I'm Silver tier. Is the damage covered?
 What fee is deducted from a Section B cancellation refund?"""
@@ -29,10 +37,14 @@ st.set_page_config(page_title="Kasturi Support Admin", page_icon="🛡️", layo
 
 def require_password():
     password = os.getenv("ADMIN_PASSWORD")
-    if not password or st.session_state.get("authed"):
+    if not password:
+        # Fail closed: an unset password must not mean "no password".
+        st.error("The dashboard is locked: set ADMIN_PASSWORD (for example in .env) and restart it.")
+        st.stop()
+    if st.session_state.get("authed"):
         return
     entered = st.text_input("Admin password", type="password")
-    if entered == password:
+    if entered and hmac.compare_digest(entered.encode(), password.encode()):
         st.session_state.authed = True
         st.rerun()
     elif entered:
@@ -86,8 +98,10 @@ def needs_human_tab(df):
         with st.container(border=True):
             left, right = st.columns([5, 1])
             status = "✅ Resolved" if row.resolved else "🚩 Open"
-            left.markdown(f"**{status} · {row.flag_reason}**  \n"
-                          f"<small>{row.time:%d %b %Y, %H:%M} · conversation `{row.session_id[:8]}`</small>",
+            # session_id comes from the browser: escape it before it goes into HTML
+            conversation = html.escape(row.session_id[:8].replace("`", ""))
+            left.markdown(f"**{status} · {html.escape(row.flag_reason)}**  \n"
+                          f"<small>{row.time:%d %b %Y, %H:%M} · conversation `{conversation}`</small>",
                           unsafe_allow_html=True)
             if row.resolved:
                 if right.button("Reopen", key=f"reopen-{row.id}"):
@@ -331,7 +345,8 @@ def release_history(live_id):
             details.append(manifest["note"])
         with st.container(border=True):
             left, right = st.columns([5, 1])
-            left.markdown(f"**{title}**  \n<small>{' · '.join(details)}</small>", unsafe_allow_html=True)
+            left.markdown(f"**{html.escape(title)}**  \n<small>{html.escape(' · '.join(details))}</small>",
+                          unsafe_allow_html=True)
             if manifest["release_id"] == live_id:
                 right.markdown("🟢 **Live**")
             elif right.button("Make live", key=f"live-{manifest['release_id']}"):

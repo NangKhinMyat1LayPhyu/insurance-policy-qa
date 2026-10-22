@@ -1,3 +1,8 @@
+"""Retrieval recall: for each question, does the passage that actually holds
+the answer reach the model's context? Compares retrieval with and without
+the canonical-terms-only pass (qa.retrieve()'s terms_k).
+"""
+
 import json
 import sys
 import time

@@ -1,3 +1,8 @@
+"""Send a set of real sample questions through the running API, so the admin
+dashboard has something to show. These are genuine bot answers (each one
+costs Gemini calls), not fake rows written into the database.
+"""
+
 import argparse
 import json
 import time

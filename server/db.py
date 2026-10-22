@@ -1,3 +1,5 @@
+"""SQLite log of every conversation turn, read by the admin dashboard."""
+
 import os
 import sqlite3
 import time
@@ -6,6 +8,8 @@ from pathlib import Path
 DEFAULT_DB_FILE = Path(__file__).resolve().parents[1] / "data" / "conversations.db"
 DB_FILE = Path(os.getenv("CONVERSATIONS_DB", DEFAULT_DB_FILE))
 
+# Columns added after the first version of the table. init_db() adds any that
+# an existing database is missing, so older logs keep working.
 ADDED_COLUMNS = {
     "category": "TEXT",
     "tier": "TEXT",
@@ -68,6 +72,10 @@ def set_resolved(message_id, resolved=True):
 
 
 def recent_turns(session_id, limit):
+    """The last `limit` exchanges of a conversation, oldest first, as
+    (question, answer) pairs. Uses the rewritten standalone question where
+    there is one, so context carries forward across several follow-ups.
+    """
     conn = get_connection()
     rows = conn.execute(
         """SELECT COALESCE(standalone_question, question) AS question, answer FROM messages

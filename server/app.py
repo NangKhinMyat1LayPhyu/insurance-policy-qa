@@ -1,3 +1,7 @@
+"""FastAPI backend: the chat API behind the embeddable widget, with conversation memory
+and a log of every turn.
+"""
+
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -29,6 +33,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Kasturi HomeCare & Health Plan -- Support Widget API", lifespan=lifespan)
 
+# Open CORS so the widget can be embedded on any site; restrict the origins in production.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -75,9 +80,11 @@ def chat(req: ChatRequest):
         standalone = qa.rewrite_with_history(req.message, history)
         text, hits, cache_info = qa.answer(standalone)
     except genai_errors.APIError as e:
+        # Usually Gemini's rate limit: return a clean "try again" instead of a 500.
         status = 503 if e.code == 429 else 502
         raise HTTPException(status_code=status, detail="The answer service is busy. Please try again in a minute.")
 
+    # One source per document page, even when several chunks come from it.
     sources = []
     seen = set()
     for doc, _method, _score in hits:

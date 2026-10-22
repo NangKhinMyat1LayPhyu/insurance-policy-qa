@@ -1,0 +1,51 @@
+{
+  "runs_per_question": 7,
+  "questions": [
+    {
+      "name": "Burst pipe, Silver: covered, RM25,000 limit, RM1,000 Excess",
+      "question": "My kitchen pipe burst and water damaged my flooring. I'm Silver tier — am I covered, and how much?",
+      "all": [
+        "25,000",
+        "1,000",
+        "source"
+      ],
+      "any": []
+    },
+    {
+      "name": "Flood, Gold, no Special Perils Extension: not covered",
+      "question": "My house flooded in the monsoon. I'm Gold tier, no Special Perils Extension. Am I covered?",
+      "all": [
+        "extension",
+        "source"
+      ],
+      "any": [
+        [
+          "not covered",
+          "isn't covered",
+          "is not covered",
+          "would not be covered",
+          "not be covered"
+        ]
+      ]
+    },
+    {
+      "name": "Phone stolen from car in driveway: not covered (exclusion for unattended vehicles / open areas)",
+      "question": "My phone was stolen from my car in the driveway — what do I claim and how much?",
+      "all": [
+        "source"
+      ],
+      "any": [
+        [
+          "not covered",
+          "isn't covered",
+          "is not covered",
+          "would not be covered",
+          "excluded from coverage",
+          "cannot claim",
+          "can't claim",
+          "nothing can be claimed"
+        ]
+      ]
+    }
+  ]
+}

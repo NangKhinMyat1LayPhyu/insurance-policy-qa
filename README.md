@@ -38,16 +38,16 @@ flowchart LR
 
 | | |
 |---|---|
-| Trick questions answered correctly | **21 / 21** runs |
+| Trick questions answered correctly | **19 / 21** runs (7 per question; phone theft 5 / 7: twice it asked for the tier instead of answering) |
 | Answer passage found by search | **13 / 13** questions |
-| Wrong cached answers on near-miss questions | **0%** |
+| Wrong cached answers on near-miss questions | **0%** (answers are reused only for near-identical questions) |
 | Follow-up questions answered correctly | **4 / 4** (1 / 4 without memory) |
 
 ## Highlights
 
 - **Fixed cut-off answers** by tracing them to thinking tokens using up the output budget. Unfinished answers are now never shown or cached.
 - **Raised search recall from 12/13 to 13/13** by adding a second search on the policy term alone.
-- **Made the cache safe** by matching on classified policy terms, since raw similarity failed on near-miss questions at every threshold.
+- **Made the cache safe**: a cached answer is reused only when the policy term and tier match and the question is near-identical, because raw similarity gave wrong answers on near-miss questions at every threshold.
 
 ## Admin dashboard
 
@@ -62,12 +62,20 @@ Headline numbers, a "needs a human" queue, searchable conversation transcripts, 
 ## Run it
 
 ```bash
-cp .env.example .env        # add your GEMINI_API_KEY
+cp .env.example .env        # add your GEMINI_API_KEY and an ADMIN_PASSWORD
 docker compose up --build
 ```
 
 Chat widget: http://localhost:8000 · Dashboard: http://localhost:8501 · Sample data: `python3 scripts/seed_demo.py`
 
+Tests (no API key needed): `pip install -r requirements-dev.txt && pytest`
+
+Before deploying beyond a demo, restrict the chat API's allowed origins (CORS) to the insurer's site and add rate limiting, since every question costs Gemini calls.
+
 ## Tech stack
 
 Python · Gemini · sentence-transformers · FAISS · BM25 · LangChain · pdfplumber · FastAPI · SQLite · Streamlit · Docker
+
+## License
+
+Code: [MIT](LICENSE). The policy PDFs are synthetic documents created for this project.

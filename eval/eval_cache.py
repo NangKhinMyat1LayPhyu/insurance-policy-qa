@@ -1,3 +1,7 @@
+"""Sweep the semantic cache's similarity threshold: hit rate on equivalent question pairs
+against false hits on near-miss pairs.
+"""
+
 import json
 import sys
 import time
@@ -39,6 +43,15 @@ def load_term_cache():
 
 
 def get_classifications_for_all(questions):
+    """Cached to disk -- this is real LLM calls, not free embedding math.
+    Deliberately does NOT treat a cached no-category result as "already have
+    it" -- confirmed on a real run that this machine's network drops
+    intermittently mid-sweep, and a failed call's result looks identical to
+    a genuine "doesn't fit any category" unless failures are retried rather
+    than cached as if they were valid. A real no-category classification is
+    expected to be rare for this domain anyway (everything should land in
+    at least "Other, General"), so always retrying costs little.
+    """
     cache = load_term_cache()
     pending = [q for q in questions if not cache.get(q, {}).get("category")]
     for i, q in enumerate(pending):
@@ -59,6 +72,12 @@ def embed_all(questions):
 
 
 def build_pairs(dataset, vecs, classifications):
+    """Returns (positive, hard_negative, general_negative), each a list of
+    (cosine_similarity, gate_passed) tuples -- a pair that fails the
+    category gate is recorded as a non-match at every threshold, which the
+    rate functions below handle directly rather than special-casing.
+    """
+
     def sim_and_gate(a, b):
         gate = category_match(classifications[a], classifications[b])
         return cosine_sim(vecs[a], vecs[b]), gate
@@ -83,6 +102,10 @@ def build_pairs(dataset, vecs, classifications):
 
 
 def rate_at(pairs, threshold):
+    """A pair counts as a match only if it passed the term gate AND meets
+    the similarity threshold -- gate failure is a hard no regardless of
+    how similar the embeddings look.
+    """
     if not pairs:
         return 0.0
     matches = sum(1 for sim, gate in pairs if gate and sim >= threshold)

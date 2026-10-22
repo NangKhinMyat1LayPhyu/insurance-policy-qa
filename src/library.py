@@ -1,3 +1,7 @@
+"""Versioned document sets ("releases") behind the bot, so an admin can
+replace a policy PDF from the dashboard without a rebuild.
+"""
+
 import fcntl
 import hashlib
 import json
@@ -29,6 +33,9 @@ def library_dir():
 
 @contextmanager
 def _lock():
+    """The API and dashboard containers share the library, and both
+    initialise it on startup -- serialise every write.
+    """
     root = library_dir()
     root.mkdir(parents=True, exist_ok=True)
     with open(root / ".lock", "w") as handle:
@@ -91,6 +98,7 @@ def release_dir(release_id, staged=False):
 
 
 def active_paths():
+    """(chunks_file, index_dir) of the live release."""
     release_id = active_release_id()
     if release_id is None:
         return CHUNKS_FILE, INDEX_DIR
@@ -115,6 +123,9 @@ def load_chunks(directory):
 
 
 def ensure_initialized():
+    """Seed the library with the repo's own documents as the first release.
+    No-op without LIBRARY_DIR or once a release is live.
+    """
     if library_dir() is None:
         return
     with _lock() as root:
@@ -152,6 +163,9 @@ def _safe_filename(name):
 
 
 def stage_replacement(doc_type, pdf_bytes, filename, version, effective_date, note=""):
+    """Build a new release with one document replaced: parsed, indexed,
+    ready to review -- but not live. Only one staged release is kept.
+    """
     if library_dir() is None:
         raise LibraryError("Document management needs LIBRARY_DIR to be set.")
     if doc_type not in ingest.DOC_LABELS:
@@ -209,6 +223,10 @@ def _summary(chunks, doc_type):
 
 
 def _sentences(pdf_path):
+    """The document's text as normalised sentences, for a readable diff.
+    Built from page text (not chunks) so chunk boundaries and line
+    re-wrapping between versions don't show up as changes.
+    """
     with pdfplumber.open(pdf_path) as pdf:
         text = " ".join(ingest.clean_prose(page.extract_text() or "") for page in pdf.pages)
     text = re.sub(r"\s+", " ", text)
@@ -227,6 +245,10 @@ def _title_found(chunks, doc_type):
 
 
 def check_report(release_id):
+    """What changed between the live release and a staged one, and whether
+    anything looks wrong. Errors block publishing; warnings need the admin
+    to confirm they've reviewed them.
+    """
     staged = release_dir(release_id, staged=True)
     manifest = read_manifest(staged)
     base = release_dir(manifest["based_on"])
@@ -292,6 +314,7 @@ def publish(release_id):
 
 
 def make_live(release_id):
+    """Roll back (or forward) to any published release."""
     if not (release_dir(release_id) / "manifest.json").exists():
         raise LibraryError(f"No published release {release_id}.")
     with _lock() as root:
