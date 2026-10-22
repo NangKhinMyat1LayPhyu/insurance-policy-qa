@@ -1,4 +1,4 @@
-# Insurance Policy Q&A Bot
+# Grounded RAG Assistant for Insurance Policies
 
 An AI support bot that answers customer questions about an insurance policy using **only the insurer's own documents**, citing the document and page for every fact. It comes with an admin dashboard for staff.
 
